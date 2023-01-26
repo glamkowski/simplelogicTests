@@ -33,6 +33,20 @@ public class HomePage extends Pages {
     @FindBy(xpath = "//span[text()='polski']")
     private WebElement polishLink;
 
+    @FindBy (xpath = "(//div[@class='col-md-4 fact-item']/*[1])[1]")
+    private WebElement projectsCounter;
+
+    @FindBy (xpath = "(//div[@class='col-md-4 fact-item']/*[1])[1]")
+    private WebElement servicesCounter;
+
+    @FindBy (xpath = "(//div[@class='col-md-4 fact-item']/*[1])[1]")
+    private WebElement specialistCounter;
+
+    public String getProjectsCounter (String ForHowMuchShouldWait) {
+        SeleniumHelper.waitForTextToBePresentInElement(this.driver, projectsCounter, ForHowMuchShouldWait);
+        return projectsCounter.getText();
+    }
+
     public String getMainHeaderText() {
         return mainHeaderText.getText();
     }

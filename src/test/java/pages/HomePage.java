@@ -21,9 +21,6 @@ public class HomePage extends Pages {
     @FindBy(xpath = "//h1[@class='h1-flash font-abril']/p")
     private WebElement mainHeaderText;
 
-    @FindBy(css = ".logo-light")
-    private WebElement lightLogo;
-
     @FindBy(xpath = "//div[@class='service-item-title']")
     private List<WebElement> servicesList;
 
@@ -36,10 +33,6 @@ public class HomePage extends Pages {
     @FindBy(xpath = "//span[text()='polski']")
     private WebElement polishLink;
 
-    public Dimension getLogoDeminsion() {
-        return lightLogo.getSize();
-    }
-
     public String getMainHeaderText() {
         return mainHeaderText.getText();
     }
@@ -50,12 +43,19 @@ public class HomePage extends Pages {
 
         if (lang == Lang.POLISH) {
             SeleniumHelper.waitForElementToBeVisible(this.driver, polishLink);
-            polishLink.click();
+            click(polishLink);
         } else {
             SeleniumHelper.waitForElementToBeVisible(this.driver, englishLink);
-            englishLink.click();
+            click(englishLink);
         }
         return this.homePage;
+    }
+
+    public void printServices (List<String> services, String text) {
+        System.out.println(text);
+        for (String service : services) {
+            System.out.println(service);
+        }
     }
 
     public List<String> getListOfServices() {

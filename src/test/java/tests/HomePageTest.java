@@ -1,21 +1,19 @@
 package tests;
 
 import models.Lang;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Pages;
 
 public class HomePageTest extends Pages {
 
-    @Test (invocationCount = 1)
+    @Test(invocationCount = 1)
     public void shouldSwitchBetweenLang() {
 
         homePage.changeLanguageTo(Lang.POLISH);
 
-        System.out.println("Results for polish lang:");
-        for (String service : homePage.getListOfServices()) {
-            System.out.println(service);
-        }
+        homePage.printServices(homePage.getListOfServices(), "Results for polish lang:");
 
         Assert.assertTrue(homePage.getListOfServices().stream().anyMatch(a -> a.equals("OUTSOURCING ZASOBÓW IT")));
         Assert.assertTrue(homePage.getListOfServices().stream().anyMatch(a -> a.equals("SZKOLENIA")));
@@ -24,10 +22,7 @@ public class HomePageTest extends Pages {
 
         homePage.changeLanguageTo(Lang.ENGLISH);
 
-        System.out.println("Results for english lang:");
-        for (String service : homePage.getListOfServices()) {
-            System.out.println(service);
-        }
+        homePage.printServices(homePage.getListOfServices(), "Results for english lang:");
 
         Assert.assertTrue(homePage.getListOfServices().stream().anyMatch(a -> a.equals("OUTSOURCING OF IT RESOURCES")));
         Assert.assertTrue(homePage.getListOfServices().stream().anyMatch(a -> a.equals("TRAININGS")));
@@ -36,6 +31,24 @@ public class HomePageTest extends Pages {
 
     }
 
+    @Test
+    public void shoudlDisplaySmallLogoBeforeScroll() {
+
+        topMenuPage.printLogoWidthAndHeight(topMenuPage.getLogoDeminsion());
+        Assert.assertTrue(topMenuPage.getLogoDeminsion().getWidth() == 77 && topMenuPage.getLogoDeminsion().getHeight() == 90);
+
+    }
+
+    @Test
+    public void shouldDisplayBigLogoAfterScroll() {
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0, 9000)");
+
+        topMenuPage.printLogoWidthAndHeight(topMenuPage.getLogoDeminsion());
+        Assert.assertTrue(topMenuPage.getLogoDeminsion().getWidth() == 43 && topMenuPage.getLogoDeminsion().getHeight() == 50);
+
+    }
 
 
 }

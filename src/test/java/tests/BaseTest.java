@@ -22,8 +22,9 @@ public class BaseTest {
         driver.quit();
     }
 
-    public String getTextFromElement(WebElement element) {
-        return element.getText();
+    public void click(WebElement element) {
+        System.out.println("Click: " + element.getTagName());
+        element.click();
     }
 
 }

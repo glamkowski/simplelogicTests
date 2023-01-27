@@ -17,6 +17,9 @@ public class TopMenuPage extends BaseTest {
     @FindBy(css = ".logo-light")
     private WebElement lightLogo;
 
+    @FindBy (xpath = "//li[@id='menu-item-198']//a[text()='Kariera']")
+    private WebElement careerLink;
+
     public Dimension getLogoDeminsion() {
         return lightLogo.getSize();
     }

@@ -1,0 +1,58 @@
+package pages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
+import tests.BaseTest;
+import tests.CareerTest;
+import utils.SeleniumHelper;
+
+import java.util.List;
+
+public class CareerPage extends BaseTest {
+
+    public CareerPage (WebDriver driver) {
+        PageFactory.initElements(driver, this);
+        this.driver = driver;
+    }
+
+    @FindBy(css = ".nav-toggle-title")
+    private WebElement menuLink;
+
+    @FindBy (css = "h4.job-item-title > a")
+    List<WebElement> mainPageOffer;
+
+    @FindBy (xpath = "//li[@id='menu-item-198']//a[text()='Kariera']")
+    WebElement careerLink;
+
+    @FindBy (xpath = "//strong")
+    WebElement strongText;
+
+    @FindBy (xpath = "//a[text()='Warszawa']")
+    WebElement warsawLink;
+
+    public Integer getMainListOffers() {
+
+        menuLink.click();
+
+        SeleniumHelper.waitForElementToBeVisible(this.driver, careerLink);
+        click(careerLink);
+
+        SeleniumHelper.waitForTextToBePresentInElement(this.driver, strongText, "Współpracuj z nami dla najlepszych projektów");
+
+        for (WebElement offer : mainPageOffer) {
+            System.out.println(offer.getText());
+        }
+
+        return mainPageOffer.size();
+
+    }
+
+    public WebDriver goToWarsawLink () {
+        click(warsawLink);
+        return this.driver;
+    }
+
+}

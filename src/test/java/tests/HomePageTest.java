@@ -1,18 +1,10 @@
 package tests;
 
 import models.Lang;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.grid.config.DescribedOption;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Pages;
-
-import java.time.Duration;
-import java.util.List;
 
 public class HomePageTest extends Pages {
 
@@ -39,7 +31,7 @@ public class HomePageTest extends Pages {
 
     }
 
-    @Test (invocationCount = 1)
+    @Test(invocationCount = 1)
     public void shoudlDisplaySmallLogoBeforeScroll() {
 
         topMenuPage.printLogoWidthAndHeight(topMenuPage.getLogoDeminsion());
@@ -59,9 +51,14 @@ public class HomePageTest extends Pages {
     }
 
     @Test
-    public void shouldDisplayCounters () {
+    public void shouldDisplayCounters() {
 
-        homePage.getProjectsCounter("210");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0, 1000)");
+
+        Assert.assertEquals(homePage.getProjectsCounter("210"), "210");
+        Assert.assertEquals(homePage.getSpecialist("37"), "37");
+        Assert.assertEquals(homePage.getServiceCounter("125"), "125");
 
     }
 

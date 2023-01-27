@@ -36,16 +36,11 @@ public class HomePage extends Pages {
     @FindBy (xpath = "(//div[@class='col-md-4 fact-item']/*[1])[1]")
     private WebElement projectsCounter;
 
-    @FindBy (xpath = "(//div[@class='col-md-4 fact-item']/*[1])[1]")
-    private WebElement servicesCounter;
-
-    @FindBy (xpath = "(//div[@class='col-md-4 fact-item']/*[1])[1]")
+    @FindBy (xpath = "(//div[@class='col-md-4 fact-item']/*[1])[2]")
     private WebElement specialistCounter;
 
-    public String getProjectsCounter (String ForHowMuchShouldWait) {
-        SeleniumHelper.waitForTextToBePresentInElement(this.driver, projectsCounter, ForHowMuchShouldWait);
-        return projectsCounter.getText();
-    }
+    @FindBy (xpath = "(//div[@class='col-md-4 fact-item']/*[1])[3]")
+    private WebElement servicesCounter;
 
     public String getMainHeaderText() {
         return mainHeaderText.getText();
@@ -78,5 +73,19 @@ public class HomePage extends Pages {
                 .collect(Collectors.toList());
     }
 
+    public String getProjectsCounter (String ForHowMuchShouldWait) {
+        SeleniumHelper.waitForTextToBePresentInElement(this.driver, projectsCounter, ForHowMuchShouldWait);
+        return projectsCounter.getText();
+    }
+
+    public String getServiceCounter (String ForHowMuchShouldWait) {
+        SeleniumHelper.waitForTextToBePresentInElement(this.driver, servicesCounter, ForHowMuchShouldWait);
+        return servicesCounter.getText();
+    }
+
+    public String getSpecialist (String ForHowMuchShouldWait) {
+        SeleniumHelper.waitForTextToBePresentInElement(this.driver, specialistCounter, ForHowMuchShouldWait);
+        return specialistCounter.getText();
+    }
 
 }

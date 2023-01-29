@@ -16,7 +16,7 @@ public class CareerTest extends Pages {
     }
 
     @Test
-    public void shouldShowWarsawOffer () {
+    public void shouldShowWarsawOffers () {
         homePage.changeLanguageTo(Lang.POLISH)
                 .goToCareerPage()
                 .goToWarsawLink();
@@ -25,12 +25,21 @@ public class CareerTest extends Pages {
     }
 
     @Test
-    public void shouldShowWroclawOffer () {
+    public void shouldShowWroclawOffers () {
         homePage.changeLanguageTo(Lang.POLISH)
                 .goToCareerPage()
                 .goToWroclawLink();
 
         Assert.assertEquals(careerPage.getVisibleListOffer().size(), 1);
+    }
+
+    @Test
+    public void shouldShowRemoteOffers () {
+        homePage.changeLanguageTo(Lang.POLISH)
+                .goToCareerPage()
+                .goToRemoteLink();
+
+        Assert.assertEquals(careerPage.getVisibleListOffer().size(), 5);
     }
 
 }

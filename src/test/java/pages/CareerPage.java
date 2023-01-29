@@ -35,6 +35,9 @@ public class CareerPage extends BaseTest {
     @FindBy (xpath = "//a[text()='Wrocław']")
     WebElement wroclawLink;
 
+    @FindBy (xpath = "//a[text()='Zdalnie']")
+    WebElement remoteLink;
+
     public List<String> getVisibleListOffer() {
 
         menuLink.click();
@@ -44,10 +47,12 @@ public class CareerPage extends BaseTest {
 
         SeleniumHelper.waitForTextToBePresentInElement(this.driver, strongText, "Współpracuj z nami dla najlepszych projektów");
 
-        for (WebElement offer : mainPageOffer) {
-            System.out.println(offer.getText());
+        for (int i = 0; i < mainPageOffer.size(); i++) {
+            System.out.println("[" + (i+1) + "]" + mainPageOffer.get(i).getText());
         }
+
         return mainPageOffer.stream().filter( x-> x.isDisplayed()).map(x -> x.getText()).collect(Collectors.toList());
+
     }
 
     public CareerPage goToWarsawLink () {
@@ -59,6 +64,12 @@ public class CareerPage extends BaseTest {
     public CareerPage goToWroclawLink () {
         SeleniumHelper.waitForElementToBeVisible(this.driver, wroclawLink);
         click(wroclawLink);
+        return this;
+    }
+
+    public CareerPage goToRemoteLink () {
+        SeleniumHelper.waitForElementToBeVisible(this.driver, remoteLink);
+        click(remoteLink);
         return this;
     }
 

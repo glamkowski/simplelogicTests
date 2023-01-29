@@ -42,9 +42,8 @@ public class HomePage extends Pages {
     @FindBy (xpath = "(//div[@class='col-md-4 fact-item']/*[1])[3]")
     private WebElement servicesCounter;
 
-    public String getMainHeaderText() {
-        return mainHeaderText.getText();
-    }
+    @FindBy (xpath = "//li[@id='menu-item-198']//a[text()='Kariera']")
+    WebElement careerLink;
 
     public HomePage changeLanguageTo(Lang lang) {
 
@@ -57,7 +56,7 @@ public class HomePage extends Pages {
             SeleniumHelper.waitForElementToBeVisible(this.driver, englishLink);
             click(englishLink);
         }
-        return this.homePage;
+        return this;
     }
 
     public void printServices (List<String> services, String text) {
@@ -86,6 +85,13 @@ public class HomePage extends Pages {
     public String getSpecialist (String ForHowMuchShouldWait) {
         SeleniumHelper.waitForTextToBePresentInElement(this.driver, specialistCounter, ForHowMuchShouldWait);
         return specialistCounter.getText();
+    }
+
+    public CareerPage goToCareerPage () {
+        menuLink.click();
+        SeleniumHelper.waitForElementToBeVisible(this.driver, careerLink);
+        click(careerLink);
+        return new CareerPage(this.driver);
     }
 
 }

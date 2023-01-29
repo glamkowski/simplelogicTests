@@ -4,12 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.Test;
 import tests.BaseTest;
-import tests.CareerTest;
 import utils.SeleniumHelper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CareerPage extends BaseTest {
 
@@ -33,7 +32,7 @@ public class CareerPage extends BaseTest {
     @FindBy (xpath = "//a[text()='Warszawa']")
     WebElement warsawLink;
 
-    public Integer getMainListOffers() {
+    public List<String> getMainListOffers() {
 
         menuLink.click();
 
@@ -45,14 +44,13 @@ public class CareerPage extends BaseTest {
         for (WebElement offer : mainPageOffer) {
             System.out.println(offer.getText());
         }
-
-        return mainPageOffer.size();
-
+        return mainPageOffer.stream().filter( x-> x.isDisplayed()).map(x -> x.getText()).collect(Collectors.toList());
     }
 
-    public WebDriver goToWarsawLink () {
+    public CareerPage goToWarsawLink () {
+        SeleniumHelper.waitForElementToBeVisible(this.driver, warsawLink);
         click(warsawLink);
-        return this.driver;
+        return this;
     }
 
 }

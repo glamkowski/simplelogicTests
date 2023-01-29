@@ -9,15 +9,19 @@ public class CareerTest extends Pages {
 
     @Test
     public void shouldShowMainOffers () {
-        homePage.changeLanguageTo(Lang.POLISH);
-        Assert.assertEquals(careerPage.getMainListOffers(), 5);
+        homePage.changeLanguageTo(Lang.POLISH)
+                .goToCareerPage();
+
+        Assert.assertEquals(careerPage.getMainListOffers().size(), 5);
     }
 
     @Test
     public void shouldShowWarsawOffer () {
-        homePage.changeLanguageTo(Lang.POLISH);
-        careerPage.getMainListOffers();
-        careerPage.goToWarsawLink();
+        homePage.changeLanguageTo(Lang.POLISH)
+                .goToCareerPage()
+                .goToWarsawLink();
+
+        Assert.assertEquals(careerPage.getMainListOffers().size(), 2);
     }
 
 }

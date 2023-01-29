@@ -32,7 +32,10 @@ public class CareerPage extends BaseTest {
     @FindBy (xpath = "//a[text()='Warszawa']")
     WebElement warsawLink;
 
-    public List<String> getMainListOffers() {
+    @FindBy (xpath = "//a[text()='Wrocław']")
+    WebElement wroclawLink;
+
+    public List<String> getVisibleListOffer() {
 
         menuLink.click();
 
@@ -50,6 +53,12 @@ public class CareerPage extends BaseTest {
     public CareerPage goToWarsawLink () {
         SeleniumHelper.waitForElementToBeVisible(this.driver, warsawLink);
         click(warsawLink);
+        return this;
+    }
+
+    public CareerPage goToWroclawLink () {
+        SeleniumHelper.waitForElementToBeVisible(this.driver, wroclawLink);
+        click(wroclawLink);
         return this;
     }
 

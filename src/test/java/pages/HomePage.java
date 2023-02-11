@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import tests.ContactFormTest;
 import utils.SeleniumHelper;
 
 import java.util.List;
@@ -44,6 +45,9 @@ public class HomePage extends Pages {
 
     @FindBy (xpath = "//li[@id='menu-item-198']//a[text()='Kariera']")
     WebElement careerLink;
+
+    @FindBy (xpath = "//li[@id='menu-item-197']/a[text()='Kontakt']")
+    WebElement contactLink;
 
     public HomePage changeLanguageTo(Lang lang) {
 
@@ -92,6 +96,13 @@ public class HomePage extends Pages {
         SeleniumHelper.waitForElementToBeVisible(this.driver, careerLink);
         click(careerLink);
         return new CareerPage(this.driver);
+    }
+
+    public ContactPage goToContactPage () {
+        menuLink.click();
+        SeleniumHelper.waitForElementToBeVisible(this.driver, contactLink);
+        click(contactLink);
+        return new ContactPage(this.driver);
     }
 
 }

@@ -27,4 +27,8 @@ public class BaseTest {
         element.click();
     }
 
+    public String getTextFromElement (WebElement element) {
+        return element.getText();
+    }
+
 }

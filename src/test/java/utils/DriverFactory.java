@@ -18,10 +18,12 @@ public class DriverFactory {
             }
 
             return new ChromeDriver(chromeOptions);
+
         } else {
+
             WebDriverManager.edgedriver().setup();
             return new EdgeDriver();
+
         }
     }
-
 }
